@@ -154,11 +154,12 @@ def main():
 							myfile.write(f'Text Found:  {labels[l]["DetectedText"]}\n')
 							myfile.write(f'#######################\n')
 
-		delete_message(message=received_messages_list[msg].queue_url)
+		try:
+			delete_message(message=received_messages_list[msg].queue_url)
+		except AttributeError as error:
+			logger.info(f'No attribute delete for the object')
 	with open(output_file, "a") as myfile:
 		myfile.write('\n\n')
-
-
 
 
 if __name__ == "__main__":
